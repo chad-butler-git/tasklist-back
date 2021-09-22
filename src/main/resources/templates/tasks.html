@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+<head>
+  <title>Home</title>
+</head>
+<body>
+<div layout:fragment="content" class="row">
+  <div class="col-xs-8 col-md-8">
+    <h3>
+      <a href="/tasks/create" class="btn btn-primary"><i class="fas fa-plus-square"></i> Task</a>
+    </h3>
+    <h2>My Tasks</h2>
+    <div class="table-responsive">
+      <table class="table" id="tasks-table">
+        <thead>
+        <tr>
+          <th>Description</th>
+          <th>Due</th>
+          <th>Updated</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${tasks}">
+          <td><a th:text="${task.description}" th:href="@{'/tasks/show/' + ${task.id}}"></a></td>
+          <td th:text="${task.due}"></td>
+          <td th:text="${new java.text.SimpleDateFormat('dd MMM yyyy').format(task.updated)}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>
